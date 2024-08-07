@@ -5,6 +5,8 @@ const Task = ({ task, onDeleteTask }) => {
     onDeleteTask(task.id);
   };
 
+  if (!task) return null; // Defensive check
+
   return (
     <div>
       <p>{task.text} - {task.category}</p>

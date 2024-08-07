@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 
 const NewTaskForm = ({ categories, onTaskFormSubmit }) => {
   const [taskText, setTaskText] = useState('');
-  const [taskCategory, setTaskCategory] = useState(categories[0]);
+  const [taskCategory, setTaskCategory] = useState(categories[0] || '');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onTaskFormSubmit({ text: taskText, category: taskCategory });
-    setTaskText('');
-    setTaskCategory(categories[0]);
+    if (taskText.trim()) { // Check for empty task text
+      onTaskFormSubmit({ text: taskText, category: taskCategory });
+      setTaskText('');
+      setTaskCategory(categories[0] || '');
+    }
   };
 
   return (
