@@ -1,42 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-const NewTaskForm = ({ categories, onTaskFormSubmit }) => {
-  const [taskText, setTaskText] = useState('');
-  const [taskCategory, setTaskCategory] = useState(categories[0] || '');
+function NewTaskForm({ categories, onTaskFormSubmit, onDetails, handleChange }) {
+const [taskCategory, setTaskCategory] = useState("Code")
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (taskText.trim()) { // Check for empty task text
-      onTaskFormSubmit({ text: taskText, category: taskCategory });
-      setTaskText('');
-      setTaskCategory(categories[0] || '');
+  const options = categories.map(cats => {
+    if (cats !== "All") {
+      return <option key={cats} value={cats}>{cats}</option>
     }
-  };
+    return cats
+ })
+
+function updateCategory(e){
+  setTaskCategory(e.target.value)
+}
+
+ function handleClick(e){
+  e.preventDefault()
+  // if (onDetails.length >= 1) {
+    const newItem = {
+      text: onDetails,
+      category: taskCategory,
+    }
+    onTaskFormSubmit(newItem)
+  // }
+ }
+
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={taskText}
-        onChange={(e) => setTaskText(e.target.value)}
-        placeholder="Task"
-        required
-      />
-      <select
-        value={taskCategory}
-        onChange={(e) => setTaskCategory(e.target.value)}
-      >
-        {categories
-          .filter((category) => category !== 'All')
-          .map((category) => (
-            <option key={category} value={category}>
-              {category}
-            </option>
-          ))}
-      </select>
-      <button type="submit">Add Task</button>
+    <form className="new-task-form">
+      <label>
+        Details
+        <input type="text" name="text" onChange={handleChange} value={onDetails}/>
+      </label>
+      <label>
+        Category
+        <select name="category" onChange={updateCategory}>
+          {options}
+        </select>
+      </label>
+      <input type="submit" value="Add task" onSubmit={handleClick}/>
     </form>
   );
-};
+}
 
 export default NewTaskForm;

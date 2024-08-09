@@ -1,18 +1,18 @@
-import React from 'react';
+import React from "react";
 
-const Task = ({ task, onDeleteTask }) => {
-  const handleDelete = () => {
-    onDeleteTask(task.id);
-  };
+function Task({ text, category, handleDelete }) {
 
-  if (!task) return null; // Defensive check
+  function handleClick() {
+    handleDelete(text);  // Pass the text of the task to the delete function
+  }
 
   return (
-    <div>
-      <p>{task.text} - {task.category}</p>
-      <button onClick={handleDelete}>Delete</button>
+    <div className="task">
+      <div className="label">{category}</div>
+      <div className="text">{text}</div>
+      <button className="delete" onClick={handleClick}>X</button>
     </div>
   );
-};
+}
 
 export default Task;
