@@ -1,6 +1,6 @@
-export const CATEGORIES = ["All", "Code", "Food", "Money", "Misc"];
+const CATEGORIES = ["All", "Code", "Food", "Money", "Misc"];
 
-export const TASKS = [
+const TASKS = [
   {
     text: "Buy rice",
     category: "Food",
@@ -14,19 +14,9 @@ export const TASKS = [
     category: "Code",
   },
   {
-    text: "Build todo API",
-    category: "Code",
-  },
-  {
-    text: "Get an ISA",
-    category: "Money",
-  },
-  {
-    text: "Cook rice",
+    text: "Make a sandwich",
     category: "Food",
   },
-  {
-    text: "Tidy house",
-    category: "Misc",
-  },
 ];
+
+export { CATEGORIES, TASKS };
